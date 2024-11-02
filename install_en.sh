@@ -206,12 +206,6 @@ update_script() {
     echo "> Update Script"
 
     curl -sL https://${GITHUB_RAW_URL}/script/install_en.sh -o /tmp/nezha.sh
-    new_version=$(grep "NZ_VERSION" /tmp/nezha.sh | head -n 1 | awk -F "=" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-    if [ -z "$new_version" ]; then
-        echo "Script failed to get, please check if the network can link https://${GITHUB_RAW_URL}/script/install.sh"
-        return 1
-    fi
-    echo "The current latest version is: ${new_version}"
     mv -f /tmp/nezha.sh ./nezha.sh && chmod a+x ./nezha.sh
 
     echo "Execute new script after 3s"
@@ -815,7 +809,7 @@ show_usage() {
 
 show_menu() {
     printf "
-    ${green}Nezha Monitor Management Script${plain} ${red}${NZ_VERSION}${plain}
+    ${green}Nezha Monitor Management Script${plain}
     --- https://github.com/naiba/nezha ---
     ${green}1.${plain}  Install Dashboard
     ${green}2.${plain}  Modify Dashbaord Configuration

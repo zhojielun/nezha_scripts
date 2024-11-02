@@ -206,12 +206,6 @@ update_script() {
     echo "> 更新脚本"
 
     curl -sL https://${GITHUB_RAW_URL}/script/install.sh -o /tmp/nezha.sh
-    new_version=$(grep "NZ_VERSION" /tmp/nezha.sh | head -n 1 | awk -F "=" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-    if [ -z "$new_version" ]; then
-        echo "脚本获取失败，请检查本机能否链接  https://${GITHUB_RAW_URL}/script/install.sh"
-        return 1
-    fi
-    echo "当前最新版本为： ${new_version}"
     mv -f /tmp/nezha.sh ./nezha.sh && chmod a+x ./nezha.sh
 
     echo "3s后执行新脚本"
@@ -815,7 +809,7 @@ show_usage() {
 
 show_menu() {
     printf "
-    ${green}哪吒监控管理脚本${plain} ${red}${NZ_VERSION}${plain}
+    ${green}哪吒监控管理脚本${plain}
     --- https://github.com/naiba/nezha ---
     ${green}1.${plain}  安装面板端
     ${green}2.${plain}  修改面板配置

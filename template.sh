@@ -206,12 +206,6 @@ update_script() {
     echo "> {{.UpdateScript}}"
 
     curl -sL https://${GITHUB_RAW_URL}/script/{{.script}} -o /tmp/nezha.sh
-    new_version=$(grep "NZ_VERSION" /tmp/nezha.sh | head -n 1 | awk -F "=" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-    if [ -z "$new_version" ]; then
-        echo "{{.ErrorFetchScript}} https://${GITHUB_RAW_URL}/script/install.sh"
-        return 1
-    fi
-    echo "{{.CurrentVersionInfo}} ${new_version}"
     mv -f /tmp/nezha.sh ./nezha.sh && chmod a+x ./nezha.sh
 
     echo "{{.ExecuteScriptInfo}}"
@@ -815,7 +809,7 @@ show_usage() {
 
 show_menu() {
     printf "
-    ${green}{{.MenuInfo}}${plain} ${red}${NZ_VERSION}${plain}
+    ${green}{{.MenuInfo}}${plain}
     --- https://github.com/naiba/nezha ---
     ${green}1.${plain}  {{.Menu1}}
     ${green}2.${plain}  {{.Menu2}}
