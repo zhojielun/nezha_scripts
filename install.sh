@@ -125,7 +125,7 @@ pre_check() {
         Docker_IMG="registry.cn-shanghai.aliyuncs.com\/naibahq\/nezha-dashboard"
     else
         if [ -z "$CN" ]; then
-            GITHUB_RAW_URL="raw.githubusercontent.com/naiba/nezha/master"
+            GITHUB_RAW_URL="raw.githubusercontent.com/nezhahq/scripts"
             GITHUB_URL="github.com"
             Get_Docker_URL="get.docker.com"
             Get_Docker_Argu=" "
@@ -205,7 +205,7 @@ select_version() {
 update_script() {
     echo "> 更新脚本"
 
-    curl -sL https://${GITHUB_RAW_URL}/script/install.sh -o /tmp/nezha.sh
+    curl -sL https://${GITHUB_RAW_URL}/install.sh -o /tmp/nezha.sh
     mv -f /tmp/nezha.sh ./nezha.sh && chmod a+x ./nezha.sh
 
     echo "3s后执行新脚本"
@@ -448,7 +448,7 @@ modify_dashboard_config() {
     if [ "$IS_DOCKER_NEZHA" = 1 ]; then
         if [ -n "$DOCKER_COMPOSE_COMMAND" ]; then
             echo "正在下载 Docker 脚本"
-            _cmd="wget -t 2 -T 60 -O /tmp/nezha-docker-compose.yaml https://${GITHUB_RAW_URL}/script/docker-compose.yaml >/dev/null 2>&1"
+            _cmd="wget -t 2 -T 60 -O /tmp/nezha-docker-compose.yaml https://${GITHUB_RAW_URL}/extras/docker-compose.yaml >/dev/null 2>&1"
             if ! eval "$_cmd"; then
                 err "脚本获取失败，请检查本机能否链接  ${GITHUB_RAW_URL}"
                 return 0
@@ -459,7 +459,7 @@ modify_dashboard_config() {
         fi
     fi
 
-    _cmd="wget -t 2 -T 60 -O /tmp/nezha-config.yaml https://${GITHUB_RAW_URL}/script/config.yaml >/dev/null 2>&1"
+    _cmd="wget -t 2 -T 60 -O /tmp/nezha-config.yaml https://${GITHUB_RAW_URL}/extras/config.yaml >/dev/null 2>&1"
     if ! eval "$_cmd"; then
         err "脚本获取失败，请检查本机能否链接  ${GITHUB_RAW_URL}"
         return 0
@@ -522,9 +522,9 @@ modify_dashboard_config() {
     if [ "$IS_DOCKER_NEZHA" = 0 ]; then
         echo "正在下载服务文件"
         if [ "$os_alpine" != 1 ]; then
-            _download="sudo wget -t 2 -T 60 -O $NZ_DASHBOARD_SERVICE https://${GITHUB_RAW_URL}/script/nezha-dashboard.service >/dev/null 2>&1"
+            _download="sudo wget -t 2 -T 60 -O $NZ_DASHBOARD_SERVICE https://${GITHUB_RAW_URL}/services/nezha-dashboard.service >/dev/null 2>&1"
         else
-            _download="sudo wget -t 2 -T 60 -O $NZ_DASHBOARD_SERVICERC https://${GITHUB_RAW_URL}/script/nezha-dashboard >/dev/null 2>&1"
+            _download="sudo wget -t 2 -T 60 -O $NZ_DASHBOARD_SERVICERC https://${GITHUB_RAW_URL}/services/nezha-dashboard >/dev/null 2>&1"
             if ! eval "$_download"; then
                 err "文件下载失败，请检查本机能否连接 ${GITHUB_RAW_URL}"
                 return 0
