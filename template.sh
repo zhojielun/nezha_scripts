@@ -118,7 +118,7 @@ pre_check() {
     fi
 
     if [ -n "$CUSTOM_MIRROR" ]; then
-        GITHUB_RAW_URL="gitee.com/naibahq/nezha/raw/master"
+        GITHUB_RAW_URL="gitee.com/naibahq/scripts/raw/main"
         GITHUB_URL=$CUSTOM_MIRROR
         Get_Docker_URL="get.docker.com"
         Get_Docker_Argu=" -s docker --mirror Aliyun"
@@ -131,7 +131,7 @@ pre_check() {
             Get_Docker_Argu=" "
             Docker_IMG="ghcr.io\/naiba\/nezha-dashboard"
         else
-            GITHUB_RAW_URL="gitee.com/naibahq/nezha/raw/master"
+            GITHUB_RAW_URL="gitee.com/naibahq/scripts/raw/main"
             GITHUB_URL="gitee.com"
             Get_Docker_URL="get.docker.com"
             Get_Docker_Argu=" -s docker --mirror Aliyun"
