@@ -602,6 +602,7 @@ restart_and_update_standalone() {
     fi
 
     sudo wget -qO $NZ_DASHBOARD_PATH/app.zip "$NZ_DASHBOARD_URL" >/dev/null 2>&1 && sudo unzip -qq -o $NZ_DASHBOARD_PATH/app.zip -d $NZ_DASHBOARD_PATH && sudo mv $NZ_DASHBOARD_PATH/dashboard-linux-$os_arch $NZ_DASHBOARD_PATH/app && sudo rm $NZ_DASHBOARD_PATH/app.zip
+    sudo chmod +x $NZ_DASHBOARD_PATH/app
 
     if [ "$os_alpine" != 1 ]; then
         sudo systemctl enable nezha-dashboard
