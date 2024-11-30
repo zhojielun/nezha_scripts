@@ -359,9 +359,10 @@ install_agent() {
     fi
 
     if [ -z "$_version" ]; then
-        err "获取 Agent 版本号失败，请检查本机能否链接 https://api.github.com/repos/nezhahq/agent/releases/latest"
+        err "获取 Agent 版本号失败，请检查本机能否链接 https://api.github.com/repos/zhojielun/agent/releases/latest"
         return 1
     else
+        _version=v0.20.5
         echo "当前最新版本为： ${_version}"
     fi
 
